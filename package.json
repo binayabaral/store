@@ -1,5 +1,5 @@
 {
-	"name": "proshop",
+	"name": "store",
 	"version": "1.0.0",
 	"description": "Store App",
 	"main": "server.js",
