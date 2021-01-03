@@ -1,0 +1,33 @@
+html {
+	font-size: $rem-base;
+}
+
+header {
+	a {
+		&:hover {
+			color: $secondary;
+		}
+	}
+
+	* {
+		color: $white;
+	}
+}
+
+.navbar-brand {
+	font-weight: 400;
+}
+
+a {
+	transition: color 0.3s ease-in-out;
+}
+
+.bg-gradient {
+	background: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
+}
+
+.table {
+	td {
+		vertical-align: middle;
+	}
+}

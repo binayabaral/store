@@ -1,0 +1,240 @@
+@import '~bootstrap/scss/_functions.scss';
+@import '~bootstrap/scss/_variables.scss';
+@import '~bootstrap/scss/_mixins.scss';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+// custom variables and override bootstrap variables
+$body-bg: #ffffff;
+
+$white: #ffffff;
+$gray-100: #f8f9fa;
+$gray-200: #e6e6e6;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #282929;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+$black: #000000;
+
+$blue: #0d1f47;
+$light-blue: #6ea2c9;
+$indigo: #6610f2;
+$purple: #6f42c1;
+$pink: #e83e8c;
+$red: #e30613;
+$orange: #ff8000;
+$orange--hover: #ef5a00;
+$yellow: #f7b03e;
+$green: #00893d;
+$teal: #3f7f79;
+$cyan: #17a2b8;
+
+$colors: ();
+$colors: map-merge(
+	(
+		'blue': $blue,
+		'indigo': $indigo,
+		'purple': $purple,
+		'pink': $pink,
+		'red': $red,
+		'orange': $orange,
+		'yellow': $yellow,
+		'green': $green,
+		'teal': $teal,
+		'cyan': $cyan,
+		'white': $white,
+		'gray': $gray-200,
+		'gray-dark': $gray-600,
+	),
+	$colors
+);
+
+$primary: $green;
+$secondary: $gray-200;
+$success: $green;
+$info: $green;
+$warning: $yellow;
+$danger: $red;
+$light: $gray-100;
+$dark: $gray-600;
+
+$theme-colors: ();
+$theme-colors: map-merge(
+	(
+		'primary': $primary,
+		'secondary': $secondary,
+		'success': $success,
+		'info': $info,
+		'warning': $warning,
+		'danger': $danger,
+		'light': $light,
+		'dark': $dark,
+	),
+	$theme-colors
+);
+
+$spacer: 1rem;
+$spacers: ();
+$spacers: map-merge(
+	(
+		0: 0,
+		1: (
+			$spacer * 0.1,
+		),
+		2: (
+			$spacer * 0.2,
+		),
+		3: (
+			$spacer * 0.3,
+		),
+		4: (
+			$spacer * 0.4,
+		),
+		5: (
+			$spacer * 0.5,
+		),
+		6: (
+			$spacer * 0.6,
+		),
+		7: (
+			$spacer * 0.7,
+		),
+		8: (
+			$spacer * 0.8,
+		),
+		9: (
+			$spacer * 0.9,
+		),
+		10: (
+			$spacer * 1,
+		),
+		15: (
+			$spacer * 1.5,
+		),
+		20: (
+			$spacer * 2,
+		),
+		25: (
+			$spacer * 2.5,
+		),
+		30: (
+			$spacer * 3,
+		),
+		35: (
+			$spacer * 3.5,
+		),
+		40: (
+			$spacer * 4,
+		),
+		45: (
+			$spacer * 4.5,
+		),
+		50: (
+			$spacer * 5,
+		),
+		55: (
+			$spacer * 5.5,
+		),
+		60: (
+			$spacer * 6,
+		),
+		70: (
+			$spacer * 7,
+		),
+		80: (
+			$spacer * 8,
+		),
+		90: (
+			$spacer * 9,
+		),
+		100: (
+			$spacer * 10,
+		),
+	),
+	$spacers
+);
+
+//Typography
+$font-size-base: 1.5rem;
+$font-weight-base: 300;
+$h1-font-size: 3rem;
+$h2-font-size: 2.4rem;
+$h3-font-size: 2.2rem;
+$h4-font-size: 2rem;
+$h5-font-size: 1.8rem;
+$headings-font-weight: 500;
+$headings-line-height: 1.2;
+$headings-margin-bottom: 1rem;
+$headings-color: $dark;
+
+$paragraph-margin-bottom: 1rem;
+
+$base-min-width: 320px;
+
+// This is the default html and body font-size for the base rem value.
+$rem-base: 10px;
+
+// Grid breakpoints
+$grid-breakpoints: (
+	xs: 0,
+	sm: 576px,
+	md: 768px,
+	lg: 992px,
+	xl: 1250px,
+);
+
+// Grid containers
+$container-max-widths: (
+	xl: 1300px,
+);
+
+// Grid columns
+$grid-columns: 12;
+$grid-gutter-width: 2rem;
+
+//font-family
+$font-family-sans-serif: 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', sans-serif;
+$font-family-base: $font-family-sans-serif;
+
+//link
+$link-color: $black;
+$link-hover-decoration: none;
+$link-hover-color: $orange;
+
+//Navbar
+$navbar-padding-x: 1rem;
+$navbar-padding-y: 1rem;
+$nav-link-padding-x: 1rem;
+$nav-link-padding-y: 0rem;
+$navbar-light-color: $black;
+$navbar-nav-link-padding-x: 1rem;
+
+//buttons
+$btn-padding-y: 0.9rem;
+$btn-padding-x: 1.8rem;
+$btn-font-size: inherit;
+$btn-border-radius: 0;
+$btn-font-size-sm: 1.5rem;
+
+//navbar-brand
+$navbar-brand-font-size: 2rem;
+
+//input
+$input-font-size: inherit;
+$input-border-radius: 0;
+$input-focus-box-shadow: 0 0 0.2rem 0.1rem $primary;
+$form-check-input-gutter: 2rem;
+
+//table
+$table-cell-padding: 1rem;
+
+//dropdown
+$dropdown-font-size: 1.3rem;
+$dropdown-min-width: 12rem;
+$dropdown-link-active-bg: none;
+$dropdown-link-active-color: $black;
+
+@import '~bootstrap/scss/bootstrap.scss';
+@import './app';
