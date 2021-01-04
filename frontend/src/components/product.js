@@ -7,7 +7,10 @@ const Product = ({ product }) => {
 	return (
 		<Card className="rounded h-100">
 			<Link to={`/product/${product._id}`}>
-				<Card.Img src={product.image} variant="top" />
+				{/* <Card.Img src={product.image} variant="top" /> */}
+				<div className="card-img-top">
+					<div style={{ backgroundImage: `url(${product.image})` }}></div>
+				</div>
 			</Link>
 
 			<Card.Body>
@@ -21,7 +24,7 @@ const Product = ({ product }) => {
 					<Rating value={product.rating} text={`${product.numReviews} reviews`} />
 				</Card.Text>
 
-				<Card.Text as="h3">${product.price}</Card.Text>
+				<Card.Text as="h3">Rs {product.price}</Card.Text>
 			</Card.Body>
 		</Card>
 	);

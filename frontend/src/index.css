@@ -21,14 +21,24 @@ main {
 	color: #fff;
 }
 
-.carousel img {
+.top-products-carousel--img {
+	width: 300px;
 	height: 300px;
-	padding: 30px;
-	margin: 40px;
-	border-radius: 50%;
-	margin-left: auto;
-	margin-right: auto;
+	max-width: 300px;
+	margin: 60px 0;
+	border-radius: 100%;
+	background: white;
+	padding: 50px;
 }
+
+.top-products-carousel--img div {
+	height: 100%;
+	width: 100%;
+	background-size: contain;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+}
+
 .carousel a {
 	margin: 0 auto;
 }

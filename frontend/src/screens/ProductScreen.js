@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap';
+import { Row, Col, ListGroup, Card, Button, Form } from 'react-bootstrap';
 import Rating from '../components/Rating';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
@@ -29,10 +29,11 @@ const ProductScreen = ({ history, match }) => {
 		if (successProductReview) {
 			setRating(0);
 			setComment('');
+			dispatch(listProductDetails(match.params.id));
 		}
 		if (!product._id || product._id !== match.params.id) {
-			dispatch(listProductDetails(match.params.id));
 			dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
+			dispatch(listProductDetails(match.params.id));
 		}
 	}, [dispatch, match, successProductReview, product._id]);
 
@@ -64,7 +65,9 @@ const ProductScreen = ({ history, match }) => {
 					<Meta title={product.name} />
 					<Row className="mb-15">
 						<Col md={6}>
-							<Image src={product.image} alt={product.name} fluid />
+							<div className="product-screen--product-img">
+								<div style={{ backgroundImage: `url(${product.image})` }}></div>
+							</div>
 						</Col>
 						<Col md={3}>
 							<ListGroup variant="flush">
