@@ -18,17 +18,17 @@ const Header = () => {
 
 	return (
 		<header>
-			<Navbar bg="primary" variant="primary" expand="lg" collapseOnSelect>
+			<Navbar bg="primary" variant="primary" expand="md" collapseOnSelect>
 				<Container>
 					<LinkContainer to="/">
 						<Navbar.Brand>Baral Store</Navbar.Brand>
 					</LinkContainer>
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
-					<Navbar.Collapse id="basic-navbar-nav">
+					<Navbar.Collapse id="basic-navbar-nav" className="py-15 py-md-0">
 						<Route render={({ history }) => <SearchBox history={history} />} />
-						<Nav className="ml-auto">
+						<Nav className="ml-auto pt-15 pt-md-0">
 							<LinkContainer to="/cart">
-								<Nav.Link>
+								<Nav.Link className="mb-10">
 									<i className="fas fa-shopping-cart"></i> Cart
 								</Nav.Link>
 							</LinkContainer>
