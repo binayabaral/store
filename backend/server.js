@@ -11,6 +11,8 @@ import userRoutes from './routes/userRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
 
+import cors from 'cors';
+
 dotenv.config();
 
 connectDB();
@@ -21,13 +23,9 @@ if (process.env.NODE_ENV === 'development') {
 	app.use(morgan('dev'));
 }
 
-app.use(function (req, res, next) {
-	res.header('Acess-Control-Allow-Origin', '*');
-	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-	next();
-});
-
 app.use(express.json());
+
+app.use(cors);
 
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
