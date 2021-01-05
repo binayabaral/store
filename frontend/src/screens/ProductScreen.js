@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Row, Col, ListGroup, Card, Button, Form } from 'react-bootstrap';
+import { Row, Col, ListGroup, Card, Button, Form, Table } from 'react-bootstrap';
 import Rating from '../components/Rating';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
@@ -35,7 +35,7 @@ const ProductScreen = ({ history, match }) => {
 			dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
 			dispatch(listProductDetails(match.params.id));
 		}
-	}, [dispatch, match, successProductReview, product._id]);
+	}, [dispatch, match, successProductReview, product._id, product.specifications]);
 
 	const addToCartHandler = () => {
 		history.push(`/cart/${match.params.id}?qty=${qty}`);
@@ -78,6 +78,13 @@ const ProductScreen = ({ history, match }) => {
 									<Rating value={product.rating} text={`${product.numReviews} reviews`} />
 								</ListGroup.Item>
 								<ListGroup.Item>Price: Rs {product.price}</ListGroup.Item>
+								<ListGroup.Item>Released On: {product.releasedDate ? product.releasedDate.substring(0, 10) : ''}</ListGroup.Item>
+								<ListGroup.Item>
+									Do you want to read the review of this product before you buy?
+									<a href={product.reviewLink} target="_blank" rel="noopener noreferrer" className="ml-3 text-underline">
+										Click Here.
+									</a>
+								</ListGroup.Item>
 								<ListGroup.Item>Description: {product.description}</ListGroup.Item>
 							</ListGroup>
 						</Col>
@@ -172,6 +179,34 @@ const ProductScreen = ({ history, match }) => {
 									)}
 								</ListGroup.Item>
 							</ListGroup>
+						</Col>
+						<Col md={6}>
+							{product.specifications ? (
+								<>
+									<h2>Specifications</h2>
+									<Table bordered responsive>
+										<tbody>
+											{Object.entries(product.specifications[0]).map(category => (
+												<>
+													<tr key={category[0]}>
+														<th colSpan={3} className="bg-light">
+															{category[0]}
+														</th>
+													</tr>
+													{Object.entries(category[1]).map(row => (
+														<tr>
+															<td>{row[0]}</td>
+															<td>{row[1]}</td>
+														</tr>
+													))}
+												</>
+											))}
+										</tbody>
+									</Table>
+								</>
+							) : (
+								''
+							)}
 						</Col>
 					</Row>
 				</>
