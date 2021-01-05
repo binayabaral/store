@@ -64,6 +64,20 @@ const productSchema = mongoose.Schema(
 			required: true,
 			default: 0,
 		},
+		reviewLink: {
+			type: String,
+			required: false,
+			default: '',
+		},
+		releasedDate: {
+			type: Date,
+			required: false,
+			default: undefined,
+		},
+		specifications: {
+			type: Array,
+			defaut: [],
+		},
 	},
 	{
 		timestamps: true,
