@@ -14,11 +14,15 @@ const getProducts = asyncHandler(async (req, res) => {
 					$regex: req.query.keyword,
 					$options: 'i',
 				},
+				brand: {
+					$regex: req.query.keyword,
+					$options: 'i',
+				},
 		  }
 		: {};
 
-	const count = await Product.countDocuments({ ...keyword });
-	const products = await Product.find({ ...keyword })
+	const count = await Product.countDocuments({ $or: [{ name: { $regex: req.query.keyword, $options: 'i' } }, { brand: { $regex: req.query.keyword, $options: 'i' } }, { category: { $regex: req.query.keyword, $options: 'i' } }] });
+	const products = await Product.find({ $or: [{ name: { $regex: req.query.keyword, $options: 'i' } }, { brand: { $regex: req.query.keyword, $options: 'i' } }, { category: { $regex: req.query.keyword, $options: 'i' } }] })
 		.sort({ releasedDate: -1 })
 		.limit(pageSize)
 		.skip(pageSize * (page - 1));
