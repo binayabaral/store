@@ -2,6 +2,12 @@ html {
 	font-size: $rem-base;
 }
 
+#root {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+}
+
 header {
 	a {
 		&:hover {
@@ -23,7 +29,19 @@ a {
 }
 
 .bg-gradient {
-	background: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
+	position: relative;
+
+	&:before {
+		content: '';
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: -9999px;
+		right: -9999px;
+		// background: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
+		background: $primary;
+		z-index: -1;
+	}
 }
 
 .table {
