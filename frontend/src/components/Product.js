@@ -20,11 +20,24 @@ const Product = ({ product }) => {
 					</Card.Title>
 				</Link>
 
+				{product.brand ? (
+					<Card.Text as="span" className="d-block mb-5">
+						From{' '}
+						<Link to={`/search/${product.brand}`} className="text-underline">
+							{product.brand}
+						</Link>
+					</Card.Text>
+				) : (
+					''
+				)}
+
 				<Card.Text as="div" className="mb-8">
 					<Rating value={product.rating} text={`${product.numReviews} reviews`} />
 				</Card.Text>
 
-				<Card.Text as="h3">Rs {product.price}</Card.Text>
+				<Card.Text as="h2" className="text-warning">
+					Rs {product.price.toLocaleString('en-IN')}
+				</Card.Text>
 			</Card.Body>
 		</Card>
 	);

@@ -50,7 +50,7 @@ const OrderListScreen = ({ history }) => {
 								<td>{order.user && order.user.name}</td>
 								<td>{order.createdAt.substring(0, 10)}</td>
 								<td>Rs {order.totalPrice}</td>
-								<td>{order.isPaid ? order.paidAt.substring(0, 10) : <i className="fas fa-times" style={{ color: 'red' }}></i>}</td>
+								<td className={order.isPaid ? '' : 'text-center'}>{order.isPaid ? order.paidAt.substring(0, 10) : <i className="fas fa-times" style={{ color: 'red' }}></i>}</td>
 								<td className={order.isDelivered ? '' : 'text-center'}>{order.isDelivered ? order.deliveredAt.substring(0, 10) : <i className="fas fa-times" style={{ color: 'red' }}></i>}</td>
 								<td>
 									<LinkContainer to={`/order/${order._id}`}>

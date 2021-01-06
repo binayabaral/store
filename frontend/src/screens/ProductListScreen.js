@@ -87,7 +87,7 @@ const ProductListScreen = ({ history, match }) => {
 								<tr key={product._id}>
 									<td>{product._id}</td>
 									<td>{product.name}</td>
-									<td>Rs {product.price}</td>
+									<td>Rs {product.price ? product.price.toLocaleString('en-IN') : 0}</td>
 									<td>{product.category}</td>
 									<td>{product.brand}</td>
 									<td className="text-center">

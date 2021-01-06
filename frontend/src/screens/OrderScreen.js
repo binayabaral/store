@@ -29,12 +29,7 @@ const OrderScreen = ({ match, history }) => {
 	const { userInfo } = userLogin;
 
 	if (!loading) {
-		//   Calculate prices
-		const addDecimals = num => {
-			return (Math.round(num * 100) / 100).toFixed(2);
-		};
-
-		order.itemsPrice = addDecimals(order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0));
+		order.itemsPrice = order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0);
 	}
 
 	useEffect(() => {
@@ -95,8 +90,12 @@ const OrderScreen = ({ match, history }) => {
 								<strong>Email: </strong> <a href={`mailto:${order.user.email}`}>{order.user.email}</a>
 							</p>
 							<p>
-								<strong>Address:</strong>
-								{order.shippingAddress.address}, {order.shippingAddress.city} {order.shippingAddress.postalCode}, {order.shippingAddress.country}
+								<strong>Address: </strong>
+								{order.shippingAddress.address}, {order.shippingAddress.city} {order.shippingAddress.country}
+							</p>
+							<p>
+								<strong>Phone Number: </strong>
+								{order.shippingAddress.phoneNumber}
 							</p>
 							{order.isDelivered ? <Message variant="success">Delivered on {order.deliveredAt}</Message> : <Message variant="danger">Not Delivered</Message>}
 						</ListGroup.Item>
@@ -126,7 +125,7 @@ const OrderScreen = ({ match, history }) => {
 													<Link to={`/product/${item.product}`}>{item.name}</Link>
 												</Col>
 												<Col md={4}>
-													{item.qty} x Rs {item.price} = Rs {item.qty * item.price}
+													{item.qty} x Rs {item.price ? item.price.toLocaleString('en-IN') : 0} = Rs {item.qty ? (item.qty * item.price).toLocaleString('en-IN') : 0}
 												</Col>
 											</Row>
 										</ListGroup.Item>
@@ -145,25 +144,25 @@ const OrderScreen = ({ match, history }) => {
 							<ListGroup.Item>
 								<Row>
 									<Col>Items</Col>
-									<Col>Rs {order.itemsPrice}</Col>
+									<Col>Rs {order.itemsPrice ? order.itemsPrice.toLocaleString('en-IN') : 0}</Col>
 								</Row>
 							</ListGroup.Item>
 							<ListGroup.Item>
 								<Row>
 									<Col>Shipping</Col>
-									<Col>Rs {order.shippingPrice}</Col>
+									<Col>Rs {order.shippingPrice ? order.shippingPrice.toLocaleString('en-IN') : 0}</Col>
 								</Row>
 							</ListGroup.Item>
 							<ListGroup.Item>
 								<Row>
 									<Col>Tax</Col>
-									<Col>Rs {order.taxPrice}</Col>
+									<Col>Rs {order.taxPrice ? order.taxPrice.toLocaleString('en-IN') : 0}</Col>
 								</Row>
 							</ListGroup.Item>
 							<ListGroup.Item>
 								<Row>
 									<Col>Total</Col>
-									<Col>Rs {order.totalPrice}</Col>
+									<Col>Rs {order.totalPrice ? order.totalPrice.toLocaleString('en-IN') : 0}</Col>
 								</Row>
 							</ListGroup.Item>
 							{!order.isPaid && (

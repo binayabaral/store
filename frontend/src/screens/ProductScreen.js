@@ -35,7 +35,7 @@ const ProductScreen = ({ history, match }) => {
 			dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
 			dispatch(listProductDetails(match.params.id));
 		}
-	}, [dispatch, match, successProductReview, product._id, product.specifications]);
+	}, [dispatch, match, successProductReview, product._id]);
 
 	const addToCartHandler = () => {
 		history.push(`/cart/${match.params.id}?qty=${qty}`);
@@ -77,7 +77,7 @@ const ProductScreen = ({ history, match }) => {
 								<ListGroup.Item>
 									<Rating value={product.rating} text={`${product.numReviews} reviews`} />
 								</ListGroup.Item>
-								<ListGroup.Item>Price: Rs {product.price}</ListGroup.Item>
+								<ListGroup.Item>Price: Rs {product.price ? product.price.toLocaleString('en-IN') : 0}</ListGroup.Item>
 								<ListGroup.Item>Released On: {product.releasedDate ? product.releasedDate.substring(0, 10) : ''}</ListGroup.Item>
 								<ListGroup.Item>
 									Do you want to read the review of this product before you buy?
@@ -95,7 +95,7 @@ const ProductScreen = ({ history, match }) => {
 										<Row>
 											<Col>Price:</Col>
 											<Col>
-												<strong>Rs {product.price}</strong>
+												<strong>Rs {product.price ? product.price.toLocaleString('en-IN') : 0}</strong>
 											</Col>
 										</Row>
 									</ListGroup.Item>

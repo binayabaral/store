@@ -1,7 +1,7 @@
 @import '~bootstrap/scss/_functions.scss';
 @import '~bootstrap/scss/_variables.scss';
 @import '~bootstrap/scss/_mixins.scss';
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
 
 // custom variables and override bootstrap variables
 $body-bg: #ffffff;
@@ -55,7 +55,7 @@ $primary: $green;
 $secondary: $gray-200;
 $success: $green;
 $info: $green;
-$warning: $yellow;
+$warning: $orange;
 $danger: $red;
 $light: $gray-100;
 $dark: $gray-600;
@@ -158,7 +158,7 @@ $spacers: map-merge(
 
 //Typography
 $font-size-base: 1.5rem;
-$font-weight-base: 300;
+$font-weight-base: 400;
 $h1-font-size: 3rem;
 $h2-font-size: 2.4rem;
 $h3-font-size: 2.2rem;
@@ -195,7 +195,7 @@ $grid-columns: 12;
 $grid-gutter-width: 2rem;
 
 //font-family
-$font-family-sans-serif: 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', sans-serif;
+$font-family-sans-serif: 'Lato', 'Helvetica Neue', 'Arial', 'Noto Sans', sans-serif;
 $font-family-base: $font-family-sans-serif;
 
 //link

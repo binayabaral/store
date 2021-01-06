@@ -34,13 +34,13 @@ const HomeScreen = ({ match }) => {
 					Back to Home
 				</Link>
 			)}
-			<h1>Latest Products</h1>
 			{loading ? (
 				<Loader />
 			) : error ? (
 				<Message variant="danger">{error}</Message>
 			) : (
 				<>
+					<h1>Latest Products</h1>
 					<Row>
 						{products.map(product => (
 							<Col key={product._id} sm={12} md={6} lg={4} xl={3} className="my-10">
