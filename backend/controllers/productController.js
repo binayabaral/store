@@ -30,6 +30,38 @@ const getProducts = asyncHandler(async (req, res) => {
 	res.json({ products, page, pages: Math.ceil(count / pageSize) });
 });
 
+// @desc    Fetch all products
+// @route   GET /api/products/autocomplete
+// @access  Public
+const getAutocompleteResults = asyncHandler(async (req, res) => {
+	const allProducts = await Product.find({ name: { $regex: req.query.keyword, $options: 'i' } }).sort({ rating: -1 });
+	const allBrands = await Product.find({ brand: { $regex: req.query.keyword, $options: 'i' } }).sort({ rating: -1 });
+	const allCategories = await Product.find({ category: { $regex: req.query.keyword, $options: 'i' } }).sort({ rating: -1 });
+
+	let products = [];
+	for (const product of allProducts) {
+		if (!products.includes(product.name)) {
+			products.push(product.name);
+		}
+	}
+
+	let brands = [];
+	for (const brand of allBrands) {
+		if (!brands.includes(brand.brand)) {
+			brands.push(brand.brand);
+		}
+	}
+
+	let categories = [];
+	for (const category of allCategories) {
+		if (!categories.includes(category.category)) {
+			categories.push(category.category);
+		}
+	}
+
+	res.json({ products, brands, categories });
+});
+
 // @desc    Fetch single product
 // @route   GET /api/products/:id
 // @access  Public
@@ -150,4 +182,4 @@ const getTopProducts = asyncHandler(async (req, res) => {
 	res.json(products);
 });
 
-export { getProducts, getProductById, deleteProduct, createProduct, updateProduct, createProductReview, getTopProducts };
+export { getProducts, getProductById, deleteProduct, createProduct, updateProduct, createProductReview, getTopProducts, getAutocompleteResults };
