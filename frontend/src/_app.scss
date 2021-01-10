@@ -170,3 +170,18 @@ a.text-underline {
 		}
 	}
 }
+
+.list-group-flush.no-borders > .list-group-item {
+	border: none;
+	padding: 0.75rem 0;
+}
+
+.container {
+	padding: 0 15px;
+}
+
+.border-bottom-md-0 {
+	@include media('screen', '>=tablet') {
+		border: none !important;
+	}
+}
