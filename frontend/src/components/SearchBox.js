@@ -32,7 +32,7 @@ const SearchBox = ({ history }) => {
 		const getSuggestions = async () => {
 			try {
 				setLoading(true);
-				const { data } = await axios.get(`/api/products/autocomplete?keyword=${keyword}`, {
+				const { data } = await axios.get(`https://baralstore.herokuapp.com/api/products/autocomplete?keyword=${keyword}`, {
 					cancelToken: source.token,
 				});
 				setProducts(data.products);
