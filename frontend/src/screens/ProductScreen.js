@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Row, Col, ListGroup, Card, Button, Form, Table } from 'react-bootstrap';
+import { Row, Col, ListGroup, Button, Form, Table } from 'react-bootstrap';
 import Rating from '../components/Rating';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
@@ -63,78 +63,73 @@ const ProductScreen = ({ history, match }) => {
 			) : (
 				<>
 					<Meta title={product.name} />
-					<Row className="mb-15">
+					<Row className="pb-15 align-items-center border-bottom">
 						<Col md={6}>
 							<div className="product-screen--product-img">
 								<div style={{ backgroundImage: `url(${product.image})` }}></div>
 							</div>
 						</Col>
-						<Col md={3}>
-							<ListGroup variant="flush">
+						<Col md={6}>
+							<ListGroup variant="flush" className="no-borders">
 								<ListGroup.Item>
-									<h3>{product.name}</h3>
+									<h1>{product.name}</h1>
 								</ListGroup.Item>
 								<ListGroup.Item>
-									<Rating value={product.rating} text={`${product.numReviews} reviews`} />
+									<Rating value={product.rating} text={`${product.numReviews} ${product.numReviews > 1 ? 'reviews' : 'review'}`} />
 								</ListGroup.Item>
-								<ListGroup.Item>Price: Rs {product.price ? product.price.toLocaleString('en-IN') : 0}</ListGroup.Item>
-								<ListGroup.Item>Released On: {product.releasedDate ? product.releasedDate.substring(0, 10) : ''}</ListGroup.Item>
 								<ListGroup.Item>
+									<strong>Brand: </strong>
+									{product.brand}
+								</ListGroup.Item>
+								<ListGroup.Item>
+									<strong>Category: </strong>
+									{product.category}
+								</ListGroup.Item>
+								<ListGroup.Item>
+									<strong>Price: </strong>Rs {product.price ? product.price.toLocaleString('en-IN') : 0}
+								</ListGroup.Item>
+								<ListGroup.Item>
+									<strong>Status: </strong>
+									{product.countInStock > 0 ? `In Stock (Only ${product.countInStock} Items Remaining)` : 'Out of Stock'}
+								</ListGroup.Item>
+								<ListGroup.Item>
+									<strong>Released On: </strong>
+									{product.releasedDate ? product.releasedDate.substring(0, 10) : ''}
+								</ListGroup.Item>
+								<ListGroup.Item>
+									<strong>Review: </strong>
 									Do you want to read the review of this product before you buy?
 									<a href={product.reviewLink} target="_blank" rel="noopener noreferrer" className="ml-3 text-underline">
 										Click Here.
 									</a>
 								</ListGroup.Item>
-								<ListGroup.Item>Description: {product.description}</ListGroup.Item>
+								<ListGroup.Item>
+									<strong>Description: </strong>
+									{product.description}
+								</ListGroup.Item>
+								{product.countInStock > 0 && (
+									<ListGroup.Item className="d-flex align-items-center">
+										<strong>Qty: </strong>
+										<Form.Control as="select" value={qty} className="w-25 ml-10" onChange={e => setQty(e.target.value)}>
+											{[...Array(product.countInStock).keys()].map(x => (
+												<option key={x + 1} value={x + 1}>
+													{x + 1}
+												</option>
+											))}
+										</Form.Control>
+									</ListGroup.Item>
+								)}
+
+								<ListGroup.Item>
+									<Button onClick={addToCartHandler} className="btn-block" type="button" disabled={product.countInStock === 0}>
+										Add To Cart
+									</Button>
+								</ListGroup.Item>
 							</ListGroup>
-						</Col>
-						<Col md={3}>
-							<Card>
-								<ListGroup variant="flush">
-									<ListGroup.Item>
-										<Row>
-											<Col>Price:</Col>
-											<Col>
-												<strong>Rs {product.price ? product.price.toLocaleString('en-IN') : 0}</strong>
-											</Col>
-										</Row>
-									</ListGroup.Item>
-
-									<ListGroup.Item>
-										<Row>
-											<Col>Status:</Col>
-											<Col>{product.countInStock > 0 ? 'In Stock' : 'Out Of Stock'}</Col>
-										</Row>
-									</ListGroup.Item>
-
-									{product.countInStock > 0 && (
-										<ListGroup.Item>
-											<Row>
-												<Col>Qty</Col>
-												<Col>
-													<Form.Control as="select" value={qty} onChange={e => setQty(e.target.value)}>
-														{[...Array(product.countInStock).keys()].map(x => (
-															<option key={x + 1} value={x + 1}>
-																{x + 1}
-															</option>
-														))}
-													</Form.Control>
-												</Col>
-											</Row>
-										</ListGroup.Item>
-									)}
-
-									<ListGroup.Item>
-										<Button onClick={addToCartHandler} className="btn-block" type="button" disabled={product.countInStock === 0}>
-											Add To Cart
-										</Button>
-									</ListGroup.Item>
-								</ListGroup>
-							</Card>
 						</Col>
 					</Row>
 					<Row>
-						<Col md={6}>
+						<Col md={6} className="py-15 border-bottom border-bottom-md-0">
 							<h2>Reviews</h2>
 							{product.reviews.length === 0 && <Message>No Reviews</Message>}
 							<ListGroup variant="flush">
@@ -180,34 +175,32 @@ const ProductScreen = ({ history, match }) => {
 								</ListGroup.Item>
 							</ListGroup>
 						</Col>
-						<Col md={6}>
-							{product.specifications ? (
-								<>
-									<h2>Specifications</h2>
-									<Table bordered responsive>
-										<tbody>
-											{Object.entries(product.specifications[0]).map(category => (
-												<>
-													<tr key={category[0]}>
-														<th colSpan={3} className="bg-light">
-															{category[0]}
-														</th>
+						{product.specifications ? (
+							<Col md={6} className="py-15">
+								<h2>Specifications</h2>
+								<Table bordered responsive>
+									<tbody>
+										{Object.entries(product.specifications[0]).map(category => (
+											<>
+												<tr key={category[0]}>
+													<th colSpan={3} className="bg-light">
+														{category[0]}
+													</th>
+												</tr>
+												{Object.entries(category[1]).map(row => (
+													<tr>
+														<td>{row[0]}</td>
+														<td>{row[1]}</td>
 													</tr>
-													{Object.entries(category[1]).map(row => (
-														<tr>
-															<td>{row[0]}</td>
-															<td>{row[1]}</td>
-														</tr>
-													))}
-												</>
-											))}
-										</tbody>
-									</Table>
-								</>
-							) : (
-								''
-							)}
-						</Col>
+												))}
+											</>
+										))}
+									</tbody>
+								</Table>
+							</Col>
+						) : (
+							''
+						)}
 					</Row>
 				</>
 			)}

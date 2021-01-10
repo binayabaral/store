@@ -23,7 +23,7 @@ const App = () => {
 	return (
 		<Router>
 			<Header />
-			<main className="py-30">
+			<main className="py-15 py-md-30">
 				<Container>
 					<Route path="/order/:id" component={OrderScreen} />
 					<Route path="/shipping" component={ShippingScreen} />
