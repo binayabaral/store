@@ -40,9 +40,7 @@ const SearchBox = ({ history }) => {
 				setCategories(data.categories);
 				setLoading(false);
 			} catch (error) {
-				if (axios.isCancel(error)) {
-					console.log('request cancelled');
-				} else {
+				if (!axios.isCancel(error)) {
 					throw error;
 				}
 			}
